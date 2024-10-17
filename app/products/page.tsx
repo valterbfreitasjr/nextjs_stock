@@ -3,9 +3,14 @@ import { Button } from "../_components/ui/button";
 import { DataTable } from "../_components/ui/data-table";
 import { productTableColumns } from "./_components/table-columns";
 import { getProducts } from "../_data-access/product/get-products";
+import { revalidatePath } from "next/cache";
 
 const ProductsPage = async () => {
-  const products = await getProducts();
+  // const products = await getProducts();
+
+  const response = await fetch("http://localhost:3000/api/products");
+  const fetchProducts = await response.json();
+  revalidatePath("/products");
 
   return (
     <div className="m-8 w-full space-y-8 rounded-lg bg-white p-8">
@@ -22,7 +27,8 @@ const ProductsPage = async () => {
           <PlusIcon size={20} /> Novo produto
         </Button>
       </div>
-      <DataTable columns={productTableColumns} data={products} />
+      {/* <DataTable columns={productTableColumns} data={products} /> */}
+      <DataTable columns={productTableColumns} data={fetchProducts} />
     </div>
   );
 };
