@@ -1,8 +1,16 @@
 import { PlusIcon } from "lucide-react";
 import { Button } from "../_components/ui/button";
-// import { DataTable } from "../_components/ui/data-table";
-// import { productTableColumns } from "./_components/table-columns";
 import ProductList from "./_components/product-list";
+import { cookies, headers } from "next/headers";
+
+export const dynamic = "force-dynamic";
+
+fetch("URL", {
+  cache: "no-cache",
+});
+
+const cookie = cookies();
+const header = headers();
 
 const ProductsPage = async () => {
   // const products = await getProducts();
@@ -34,7 +42,6 @@ const ProductsPage = async () => {
       </div>
       {/* <DataTable columns={productTableColumns} data={products} /> */}
       <ProductList />
-      {/* <DataTable columns={productTableColumns} data={products} /> */}
     </div>
   );
 };
